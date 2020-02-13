@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Author : cory
-Date   : 2020-01-30
+Date   : 2020-02-11
 Purpose: Rock the Casbah
 """
 
@@ -18,9 +18,15 @@ def get_args():
         description='Rock the Casbah',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('word',
+    parser.add_argument('fav',
                         metavar='str',
-                        help='A Word')
+                        nargs='+',
+                        help='A favorite thing')
+
+    parser.add_argument('-s',
+                        '--sep',
+                        help='Seperate your things',
+                        default=', ',)
 
     return parser.parse_args()
 
@@ -30,10 +36,21 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    word = args.word
-    article = 'an' if word[0].lower() in 'aeiou' else 'a'
+    fav = args.fav
 
-    print(f'Ahoy, Captain, {article} {word} off the larboard bow!')
+
+    few = args.sep
+
+
+    if len(fav) == 1:
+        print(f'{fav[0]}')
+        print(f'This is one of my favorite things.')
+    else:
+        print(few.join(fav))
+        print(f'These are a few of my favorite things.')
+
+
+
 
 
 # --------------------------------------------------

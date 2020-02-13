@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Author : cory
-Date   : 2020-01-30
+Date   : 2020-02-11
 Purpose: Rock the Casbah
 """
 
@@ -18,9 +18,17 @@ def get_args():
         description='Rock the Casbah',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('word',
+    parser.add_argument('items',
                         metavar='str',
-                        help='A Word')
+                        nargs='+',
+                        help='A positional argument')
+
+    parser.add_argument('-s',
+                        '--sorted',
+                        help='Sort that list',
+                        action='store_true')
+
+
 
     return parser.parse_args()
 
@@ -30,10 +38,14 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    word = args.word
-    article = 'an' if word[0].lower() in 'aeiou' else 'a'
+    items= args.items
 
-    print(f'Ahoy, Captain, {article} {word} off the larboard bow!')
+    if len(items) == 1:
+        print(f'You are bringing {items[0]}.')
+    elif len(items) == 2:
+        print('You are bringing {}.'.format(' and '.join(items)))
+    else:
+        print('You are bringing {}.'.format)
 
 
 # --------------------------------------------------

@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """
 Author : cory
-Date   : 2020-01-30
+Date   : 2020-01-27
 Purpose: Rock the Casbah
 """
 
 import argparse
-import os
-import sys
 
 
 # --------------------------------------------------
@@ -15,7 +13,7 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Rock the Casbah',
+        description="Crow's Nest",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('word',
@@ -33,7 +31,7 @@ def main():
     word = args.word
     article = 'an' if word[0].lower() in 'aeiou' else 'a'
 
-    print(f'Ahoy, Captain, {article} {word} off the larboard bow!')
+    print(f"Ahoy, Captain, {article} {word} off the larboard bow!")
 
 
 # --------------------------------------------------
