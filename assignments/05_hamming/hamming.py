@@ -45,10 +45,10 @@ def main():
         comp = (list(zip(sp[0], sp[1])))
         dis = sum(1 for a, b in comp if a != b) + abs(len(sp[1])) - abs(len(sp[0]))
 
-        #if args.min:
-          #  print()
+        if dis >= args.min:
+            print(f'{dis:8}:{sp[0]:20} {sp[1]:20}')
 
-        print(f'{dis:8}:{sp[0]:20} {sp[1]:20}')
+
 
 
 
