@@ -46,7 +46,7 @@ def main():
         dis = sum(1 for a, b in comp if a != b) + abs(len(sp[1])) - abs(len(sp[0]))
 
         if dis >= args.min:
-            print(f'{dis:8}:{sp[0]:20} {sp[1]:20}')
+            print(f'{dis:8}:{sp[0]:19} {sp[1]:20}')
 
 
 
