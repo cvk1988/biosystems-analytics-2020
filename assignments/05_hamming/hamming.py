@@ -44,37 +44,8 @@ def main():
         sp = line.split()
         comp = (list(zip(sp[0], sp[1])))
         dis = sum(1 for a, b in comp if a != b) + abs(len(sp[1])) - abs(len(sp[0]))
-
         if dis >= args.min:
             print(f'{dis:8}:{sp[0]:19} {sp[1]:20}')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #for fh in file:
-     #   word1 = file.split([0])
-      #  word2 = file.split([1])
-       # print(word1)
-
-    #for line in file:
-     #   print(line, end='')
-
-
-
-
-
-
-
 
 # --------------------------------------------------
 if __name__ == '__main__':
