@@ -27,7 +27,7 @@ def get_args():
                         help='A file with codon translations',
                         metavar='FILE',
                         type=argparse.FileType('r'),
-                        default=None)
+                        required=True)
 
     #parser.add_argument('-o',
                   #      '--outfile',
