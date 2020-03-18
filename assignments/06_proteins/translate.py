@@ -51,35 +51,13 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    dict = {line[0:3].upper(): line[4:].upper().strip() for line in args.codons}
-    k = 3
+    codus = {line[0:3].upper(): line[4:].upper().strip() for line in args.codons}
+    k=3
+    out_fh = open(args.outfile, 'wt')
     for codon in [args.nucleic_acids[i:i + k] for i in range(0, len(args.nucleic_acids) - k + 1, k)]:
-       if codon.upper() in dict:
-        open(args.outfile, 'wt') if args.outfile else sys.stdout
-        args.outfile.write(codon.upper() + '\n')
-        args.outfile.close()
-
-
-
-    #print(dict)
-
-
-    #for codon in args.nucleic_acids:
-     #   if codon.upper() in dict:
-      #      print(dict[line])
-
-
-            #out_fh = open(args.outfile, 'wt') if args.outfile else sys.stdout
-            #out_fh.write(args.nucleic_acids.upper() + '\n')
-            #out_fh.close()
-
-
-
-
-
-
-
-
+        protein = codus.get(codon.upper(), '-')
+        out_fh.write(protein.strip())
+    print(f'Output written to \"{args.outfile}\".')
 
 # --------------------------------------------------
 if __name__ == '__main__':
