@@ -90,10 +90,13 @@ def main():
     random.seed(args.seed)
     pool = create_pool(args.pctgc, args.maxlen, args.seqtype)
 
+    seq_num = 0
     for i in range(args.numseqs):
         seq_len = random.randint(args.minlen, args.maxlen)
         seq = random.sample(pool, seq_len)
-        args.outfile.write(''.join(seq))
+        finseq = ''.join(seq)
+        seq_num += 1
+        args.outfile.write(f'>{seq_num}\n{finseq}\n')
 
     args.outfile.close()
 
