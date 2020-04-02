@@ -100,7 +100,7 @@ def main():
 
     args.outfile.close()
 
-    print(f'Done, wrote {args.numseqs} {args.seqtype.upper()} sequences to {args.outfile}')
+    print(f'Done, wrote {args.numseqs} {args.seqtype.upper()} sequences to "{args.outfile.name}".')
 
 
 
