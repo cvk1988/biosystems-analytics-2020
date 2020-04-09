@@ -62,18 +62,17 @@ def main():
 
     args = get_args()
     random.seed(args.seed)
-    file = enumerate(args.file)
 
-    for fh, name in enumerate(args.file, start=1):
-        basename = os.path.basename(name.name)
+
+    for i, fh in enumerate(args.file, start=1):
+        basename = os.path.basename(fh.name)
         out_file = os.path.join(args.outdir, basename)
-        print(f'Wrote')
 
-    out_fh = open(args.file)
-    for rec in SeqIO.parse(fh, 'fasta'):
-        if random.random(rec) < (args.pct):
-            SeqIO.write(rec, out_fh, 'fasta')
-    out_fh.close
+        out_fh = open(out_file)
+        for rec in SeqIO.parse(fh, 'fasta'):
+            if random.random(rec) <= (args.pct):
+                SeqIO.write(rec, out_fh, 'fasta')
+        out_fh.close
 
     print (success)
 
