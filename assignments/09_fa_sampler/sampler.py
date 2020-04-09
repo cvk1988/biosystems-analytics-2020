@@ -38,7 +38,7 @@ def get_args():
                         type=int,
                         default=None)
 
-    parser.add_argument('-',
+    parser.add_argument('-o',
                         '--outdir',
                         help='Output directory',
                         metavar='DIR',
@@ -47,7 +47,7 @@ def get_args():
 
     args = parser.parse_args()
 
-    if not 0 <= args.pct <= 1:
+    if not 0 < args.pct <= 1:
         parser.error(f'--pct \"{args.pct}\" must be between 0 and 1')
 
     if not os.path.isdir(args.outdir):
@@ -64,14 +64,14 @@ def main():
     random.seed(args.seed)
 
     numf = 0
+    nums = 0
     for i, fh in enumerate(args.file, start=1):
         basename = os.path.basename(fh.name)
         out_file = os.path.join(args.outdir, basename)
         numf += 1
-        print(f'  {i}: {fh.name}')
+        print(f'  {i}: {basename}')
 
         out_fh = open(out_file, 'wt')
-        nums = 0
         for rec in SeqIO.parse(fh, 'fasta'):
             if random.random() <= args.pct:
                 SeqIO.write(rec, out_fh, 'fasta')
@@ -79,9 +79,9 @@ def main():
         out_fh.close
 
     if numf is 1:
-        print(f'Wrote {nums} sequences from {numf} file to directory \"{args.outdir}\"')
+        print(f'Wrote {nums:,d} sequences from {numf} file to directory \"{args.outdir}\"')
     else:
-        print(f'Wrote {nums} sequences from {numf} files to directory \"{args.outdir}\"')
+        print(f'Wrote {nums:,d} sequences from {numf} files to directory \"{args.outdir}\"')
 
 
 
