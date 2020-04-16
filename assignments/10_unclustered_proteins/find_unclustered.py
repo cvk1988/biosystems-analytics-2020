@@ -23,14 +23,14 @@ def get_args():
                         help='Proteins FASTA',
                         metavar='FILE',
                         type=argparse.FileType('r'),
-                        default=None)
+                        required=True)
 
     parser.add_argument('-c',
                     '--cdhit',
                     help='Output file from CD-HIT (clustered proteins)',
                     metavar='FILE',
                     type=argparse.FileType('r'),
-                    default=None)
+                    required=True)
 
     parser.add_argument('-o',
                         '--outfile',
@@ -41,10 +41,10 @@ def get_args():
 
     args = parser.parse_args()
 
-    if not args.cdhit:
-        parser.error(f'the following arguments are required: -c/--cdhit')
-    if not args.proteins:
-        parser.error(f'the following arguments are required: -p/--proteins')
+    # if not args.cdhit:
+    #     parser.error(f'the following arguments are required: -c/--cdhit')
+    # if not args.proteins:
+    #     parser.error(f'the following arguments are required: -p/--proteins')
 
     return args
 
@@ -56,25 +56,28 @@ def main():
     args = get_args()
     tots = 0
     seq_tots = 0
+    protein_ids = set()
 
     for line in args.cdhit:
+        lines = 0
         match = re.search(r'>(\d+)', line)
         if match:
             id = match.group(1)
-            protein_ids = set()
             protein_ids.add(id)
-            tots += 1
-           #print(protein_ids)
+            lines += 1
+            tots += lines
 
     for rec in SeqIO.parse(args.proteins, 'fasta'):
         prot_id = re.sub(r'\|.*', '', rec.id)
-
+        pros = 0
         if prot_id not in protein_ids:
             SeqIO.write(rec, args.outfile, 'fasta')
-            seq_tots += 1
+            pros += 1
+        seq_tots += pros
 
+        unclustered = seq_tots + tots
 
-    print(f'Wrote {seq_tots:,d} of {tots:,d} unclustered proteins to \"{args.outfile.name}\"')
+    print(f'Wrote {seq_tots:,d} of {unclustered:,d} unclustered proteins to \"{args.outfile.name}\"')
 
 
 
