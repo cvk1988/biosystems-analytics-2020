@@ -47,7 +47,7 @@ def get_args():
 
     args = parser.parse_args()
 
-    if not 0 < args.pct <= 1:
+    if not 0.00 < args.pct <= 1:
         parser.error(f'--pct \"{args.pct}\" must be between 0 and 1')
 
     if not os.path.isdir(args.outdir):
