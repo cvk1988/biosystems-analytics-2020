@@ -59,21 +59,17 @@ def main():
     protein_ids = set()
 
     for line in args.cdhit:
-        lines = 0
         match = re.search(r'>(\d+)', line)
         if match:
             id = match.group(1)
             protein_ids.add(id)
-            lines += 1
-            tots += lines
+            tots += 1
 
     for rec in SeqIO.parse(args.proteins, 'fasta'):
         prot_id = re.sub(r'\|.*', '', rec.id)
-        pros = 0
         if prot_id not in protein_ids:
             SeqIO.write(rec, args.outfile, 'fasta')
-            pros += 1
-        seq_tots += pros
+            seq_tots += 1
 
         unclustered = seq_tots + tots
 
