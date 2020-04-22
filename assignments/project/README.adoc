@@ -1,5 +1,4 @@
-= *Read Separator*
-[.lead]
+= *Read Separator
 You will be making a program that can accept one or more fasta or fastq
 input files that contain forward and reverse reads in alternate lines. 
 The program will create a directory for each file that has the basename
@@ -7,5 +6,8 @@ of the file given, and inside the directory there will be two written
 files that contain forward reads and reverse reads. The file names will
 include the oiginal input file name and either _f or _r.
 
-Write a Python program called 'separator.py' that will separate forward 
+Write a Python program called `separator.py` that will separate forward 
 and reverse reads from the given input files.
+    * `-f|--files`: name of the FASTA or FASTQ file that contains the reads
+    * `-o|--outfile`: name of the outfiles
+    * `-d|--outdir`: name of the output directory
