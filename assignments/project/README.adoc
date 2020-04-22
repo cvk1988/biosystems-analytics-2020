@@ -12,6 +12,7 @@ and reverse interleaved reads from the given input files.
 The inputs are in the project directory and are labeled `file1.fastq`
 and `file2.fastq`.
 
+IMPORTANT: You can do this!
 
 The program must contain the parameters:
   
