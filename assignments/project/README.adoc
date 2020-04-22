@@ -1,14 +1,34 @@
 = Read Separator
-You will be making a program that can accept one or more fasta or fastq
-input files that contain forward and reverse reads in alternate lines. 
+You will be making a program that can accept one or more fastq
+input files that contain forward and reverse reads interleaved. 
 The program will create a directory for each file that has the basename
 of the file given, and inside the directory there will be two written 
 files that contain forward reads and reverse reads. The file names will
-include the oiginal input file name and either _f or _r.
+include the oiginal input file name and either `_f` or `_r`.
 
 Write a Python program called `separator.py` that will separate forward 
-and reverse reads from the given input files.
+and reverse interleaved reads from the given input files.
+
+The inputs are in the project directory and are labeled `file1.fastq`
+and `file2.fastq`.
+
+
+The program must contain the parameters:
   
-    * `-f|--files`: name of the FASTA or FASTQ file that contains the reads
-    * `-o|--outfile`: name of the outfiles
+    * One or more positional FILE arguments
     * `-d|--outdir`: name of the output directory
+
+Here is the usage your program should create for `-h` or `--help`:
+
+
+`$ ./separator.py --help
+usage: separator.py [-h] [-d DIR] FILE [FILE ...]
+
+Separates forward and reversed reads from interleaved lines
+
+positional arguments:
+  FILE                  A FASTQ file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DIR, --outdir DIR  Output directory (default: out)`
