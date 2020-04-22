@@ -33,3 +33,13 @@ Here is the usage your program should create for `-h` or `--help`:
    -h, --help            show this help message and exit
    -d DIR, --outdir DIR  Output directory (default: out)
 ....
+
+Once done, print a happy little message:
+
+....
+$ ./separator.py file1.fastq file2.fastq
+Done. You are valued and appreciated.
+....
+
+== Creating the Directories
+
