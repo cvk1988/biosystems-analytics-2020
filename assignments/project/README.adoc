@@ -20,7 +20,7 @@ The program must contain the parameters:
 
 Here is the usage your program should create for `-h` or `--help`:
 
-
+....
  $ ./separator.py --help
  usage: separator.py [-h] [-d DIR] FILE [FILE ...]
      
@@ -32,3 +32,4 @@ Here is the usage your program should create for `-h` or `--help`:
  optional arguments:
    -h, --help            show this help message and exit
    -d DIR, --outdir DIR  Output directory (default: out)
+....
