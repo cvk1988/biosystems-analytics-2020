@@ -1,4 +1,5 @@
 = Read Separator
+
 You will be making a program that can accept one or more fastq
 input files that contain forward and reverse reads interleaved. 
 The program will create a directory where the files will be written.
@@ -71,12 +72,11 @@ A passing test suite looks like this:
 
 ....
 
-test.py::test_exists PASSED                                                                                          [ 20%]
-test.py::test_usage PASSED                                                                                           [ 40%]
-test.py::test_bad_file PASSED                                                                                        [ 60%]
-test.py::test_defaults PASSED                                                                                        [ 80%]
-test.py::test_options PASSED                                                                                         [100%]
+test.py::test_exists PASSED                                                                                   [ 20%]
+test.py::test_usage PASSED                                                                                    [ 40%]
+test.py::test_bad_file PASSED                                                                                 [ 60%]
+test.py::test_defaults PASSED                                                                                 [ 80%]
+test.py::test_options PASSED                                                                                  [100%]
 
-=========================================== 5 passed, 1 warnings in 0.84 seconds ===========================================
+==================================== 5 passed, 1 warnings in 0.84 seconds ===========================================
 ....
-
