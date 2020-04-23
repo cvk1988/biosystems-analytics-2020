@@ -42,21 +42,19 @@ def get_args():
 
 # --------------------------------------------------
 def main():
-    """Make a jazz noise here"""
+    """Snake Jazz"""
 
     args = get_args()
 
 
     for fh in args.file:
         basename = os.path.basename(fh.name)
+        sp = basename.split('.')
+        _f = '_f.'.join(sp)
+        _r = '_r.'.join(sp)
 
-        _f = basename.split('.')
-        _r = basename.split('.')
-        _ff = '_f.'.join(_f)
-        _rr = '_r.'.join(_r)
-
-        forward = os.path.join(args.outdir, _ff)
-        reverse = os.path.join(args.outdir, _rr)
+        forward = os.path.join(args.outdir, _f)
+        reverse = os.path.join(args.outdir, _r)
 
         out_f = open(forward, 'wt')
         out_r = open(reverse, 'wt')
