@@ -1,10 +1,10 @@
 = Read Separator
 You will be making a program that can accept one or more fastq
 input files that contain forward and reverse reads interleaved. 
-The program will create a directory for each file that has the basename
-of the file given, and inside the directory there will be two written 
-files that contain forward reads and reverse reads. The file names will
-include the oiginal input file name and either `_f` or `_r`.
+The program will create a directory where the files will be written.
+File names should be written so that the basename of the input file
+will be the prefix and `_f` or `_r` will be added _before_ the `.fastq` 
+extension. Completed files should look like this: `file1_f.fastq`.
 
 Write a Python program called `separator.py` that will separate forward 
 and reverse interleaved reads from the given input files.
@@ -17,7 +17,7 @@ IMPORTANT: You can do this!
 The program must contain the parameters:
   
     * One or more positional FILE arguments
-    * `-d|--outdir`: name of the output directory
+    * `-o|--outdir`: name of the output directory
 
 Here is the usage your program should create for `-h` or `--help`:
 
@@ -32,7 +32,7 @@ Here is the usage your program should create for `-h` or `--help`:
                                                              
  optional arguments:
    -h, --help            show this help message and exit
-   -d DIR, --outdir DIR  Output directory (default: out)
+   -o DIR, --outdir DIR  Output directory (default: out)
 ....
 
 Once done, print a happy little message:
@@ -40,12 +40,43 @@ Once done, print a happy little message:
 ....
 $ ./separator.py file1.fastq file2.fastq
 Done. You are valued and appreciated.
+You have also written 250 sequences to separated/file2_f.fastq and 250 sequences to separated/file2_r.fastq. 
 ....
 
-== Creating the Directories
+== Creating the Directory and New File Names
+You will need to create a new directory. How will you do this?
+The names of the files have a very specific format. You need
+to add the `_f` and `_r` to any number of files that you can
+pass as arguments. 
+
+TIP: You will not be able to add the `_f` and `_r` to the `fh.name` without mutating it somehow.
+
+You will be using `os.path` to create 2 new files _for_ each of the input files.
+
 
 == Writing Interleaved Lines to New Files
+The files `file1.fastq` and `file2.fastq` contain paired reads
+from an Illumina sequencing run. The raw data for the sequencing
+run contained separate files for forward and reverse paired-end
+reads, but a mapping software interleaved the forward and reverse
+paired reads into one file. You will need to write a code that
+separates the files into two different files.
+
+This will be done `for` each file.
+
+ 
 
 == Passing Test
+A passing test suite looks like this:
 
+....
+
+test.py::test_exists PASSED                                                                                          [ 20%]
+test.py::test_usage PASSED                                                                                           [ 40%]
+test.py::test_bad_file PASSED                                                                                        [ 60%]
+test.py::test_defaults PASSED                                                                                        [ 80%]
+test.py::test_options PASSED                                                                                         [100%]
+
+=========================================== 5 passed, 1 warnings in 0.84 seconds ===========================================
+....
 
