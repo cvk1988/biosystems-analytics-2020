@@ -49,25 +49,33 @@ def main():
 
     for fh in args.file:
         basename = os.path.basename(fh.name)
-        _f = basename.join('_f')
-        _r = basename.join('_r')
-        forward = os.path.join(args.outdir, _f)
-        reverse = os.path.join(args.outdir, _r)
+
+        _f = basename.split('.')
+        _r = basename.split('.')
+        _ff = '_f.'.join(_f)
+        _rr = '_r.'.join(_r)
+
+        forward = os.path.join(args.outdir, _ff)
+        reverse = os.path.join(args.outdir, _rr)
 
         out_f = open(forward, 'wt')
         out_r = open(reverse, 'wt')
         n = 0
+        fornum = 0
+        revnum = 0
         for rec in SeqIO.parse(fh, 'fastq'):
             n += 1
             if n % 2 == 0:
                 SeqIO.write(rec, out_f, 'fastq')
+                fornum += 1
             else:
                 SeqIO.write(rec, out_r, 'fastq')
+                revnum += 1
         out_f.close()
         out_r.close()
 
-
-    print('done')
+    print('Done. You are valued and apppreciated.')
+    print(f'You have also written {fornum:,d} sequences to {out_f.name} and {revnum:,d} sequences to {out_r.name}.')
 
 
 # --------------------------------------------------
