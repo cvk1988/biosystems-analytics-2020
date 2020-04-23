@@ -78,7 +78,7 @@ def main():
                 nums += 1
         out_fh.close
 
-    if numf is 1:
+    if numf == 1:
         print(f'Wrote {nums:,d} sequences from {numf} file to directory \"{args.outdir}\"')
     else:
         print(f'Wrote {nums:,d} sequences from {numf} files to directory \"{args.outdir}\"')
