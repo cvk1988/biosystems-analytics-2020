@@ -65,6 +65,21 @@ separates the files into two different files.
 
 This will be done `for` each file.
 
+....
+for rec in SeqIO.parse(..., 'fastq'):   *(1)*
+    if ...    *(2)*
+        SeqIO.write(...)   *(3)*
+    else ...   *(4)*
+        SeqIO.write(...)   *(5)*
+....
+
+  . What will you use as a file to parse?
+  . How will you use an if statement to select only the forward reads?
+  . This is a write statement for the lines of forward reads.
+  . This statment should give you the reverse reads.
+  . Make sure this write statement is to the correct file!
+
+
  
 
 == Passing Test
@@ -72,11 +87,11 @@ A passing test suite looks like this:
 
 ....
 
-test.py::test_exists PASSED                                                                                   [ 20%]
-test.py::test_usage PASSED                                                                                    [ 40%]
-test.py::test_bad_file PASSED                                                                                 [ 60%]
-test.py::test_defaults PASSED                                                                                 [ 80%]
-test.py::test_options PASSED                                                                                  [100%]
+test.py::test_exists PASSED                                                                            [ 20%]
+test.py::test_usage PASSED                                                                             [ 40%]
+test.py::test_bad_file PASSED                                                                          [ 60%]
+test.py::test_defaults PASSED                                                                          [ 80%]
+test.py::test_options PASSED                                                                           [100%]
 
-==================================== 5 passed, 1 warnings in 0.84 seconds ===========================================
+==================================== 5 passed, 1 warnings in 0.84 seconds ====================================
 ....
