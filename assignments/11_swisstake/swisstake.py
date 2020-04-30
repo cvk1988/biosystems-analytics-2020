@@ -11,6 +11,8 @@ import sys
 from Bio import SeqIO
 import re
 import string
+
+
 # --------------------------------------------------
 def get_args():
     """Get command-line arguments"""
@@ -29,8 +31,8 @@ def get_args():
                         help='Keyword to take',
                         metavar='str',
                         type=str,
-                        required=True,
-                        default='')
+                        nargs='+',
+                        required=True)
 
     parser.add_argument('-s',
                         '--skiptaxa',
@@ -47,12 +49,13 @@ def get_args():
                         type=argparse.FileType('wt'),
                         default='out.fa')
 
-
     return parser.parse_args()
+
 
 # --------------------------------------------------
 def keyword():
     re.search
+
 
 # --------------------------------------------------
 def main():
@@ -69,23 +72,24 @@ def main():
 
         taxa = annots.get('taxonomy')
         if taxa:
-            taxa = set(map(str.lower,taxa))
+            taxa = set(map(str.lower, taxa))
             if skip_taxa.intersection(taxa):
                 num_skp += 1
                 continue
 
         keywords = annots.get('keywords')
         if keywords:
-           keywords = set(map(str.lower, keywords))
-           
-           if wanted_kw.intersection(keywords):
-               num_taken += 1
-               write.SeqIO(rec, args.output, 'fasta-2line')
-           else:
-               num_skipped += 1
+            keywords = set(map(str.lower, keywords))
 
+            if wanted_kw.intersection(keywords):
+                num_taken += 1
+                SeqIO.write(rec, args.output, 'fasta-2line')
+            else:
+                num_skp += 1
 
-    print(f'Done, skipped {num_skp} and took {num_taken}. See output in  \"{args.output.name}\".')
+    print(
+        f'Done, skipped {num_skp} and took {num_taken}. See output in "{args.output.name}".'
+    )
 
 
 # --------------------------------------------------
