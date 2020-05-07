@@ -45,7 +45,11 @@ def test_bad_file():
 
     bad = random_filename()
     rv, out = getstatusoutput('{} {} -k foo'.format(prg, bad))
+<<<<<<< HEAD
     assert rv > 0
+=======
+    assert rv != 0
+>>>>>>> 442292feb36e891fc521cb91b454bcf14ef95c8a
     assert re.search(f"No such file or directory: '{bad}'", out)
 
 
