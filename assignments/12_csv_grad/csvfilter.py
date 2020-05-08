@@ -76,35 +76,72 @@ def main():
     seqs_wr = 0
     fields = csv.DictWriter(args.outfile, reader.fieldnames)
     fields.writeheader()
-    for rec in reader:
-        writer = csv.DictWriter(args.outfile, rec)
+
+    if re.search(col, val_col, re.IGNORECASE):
+        for rec in reader:
+            writer = csv.DictWriter(args.outfile, rec)
+            if col and val:
+                if re.search(col, val_col, re.IGNORECASE):
+                    if re.search(val, str(rec.values()), re.IGNORECASE):
+                        writer.writerow(rec)
+                        seqs_wr += 1
+            elif val:
+                if re.search(val, str(rec.values()), re.IGNORECASE):
+                    writer.writerow(rec)
+                    seqs_wr += 1
+    else:
+        sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+
+    print(f'Done, wrote {seqs_wr} to \"{args.outfile.name}\".')
+    # for rec in reader:
+    #     writer = csv.DictWriter(args.outfile, rec)
+    #     if re.search(col, val_col, re.IGNORECASE):
+    #         # writer.writeheader
+    #         # writer.writerow(rec)
+    #         # seqs_wr += 1
+    #     else:
+    #         sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+    #     if re.search(val, str(rec.values()), re.IGNORECASE):
+    #         # writer.writeheader()
+    #         writer.writerow(rec)
+    #         seqs_wr += 1
+    #         if re.search(col, val_col, re.IGNORECASE):
+    #         # writer.writeheader
+    #             writer.writerow(rec)
+    #             seqs_wr += 1
+
+
+
         # writer.writeheader()
         # if re.search(val, str(rec.values()), re.IGNORECASE):
         #     # writer.writeheader()
         #     writer.writerow(rec)
         #     seqs_wr += 1
-        if col and val:
-            if re.search(col, val_col, re.IGNORECASE):
-                # writer.writeheader
-                writer.writerow(rec)
-                # seqs_wr += 1
-            else:
-                sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
-            if re.search(val, str(rec.values()), re.IGNORECASE):
-                # writer.writeheader()
-                writer.writerow(rec)
-                seqs_wr += 1
-
+        # if col and val:
+        #     if re.search(col, val_col, re.IGNORECASE):
+        #         # writer.writeheader
+        #         writer.writerow(rec)
+        #         # seqs_wr += 1
+        #     else:
+        #         sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+        #     if re.search(val, str(rec.values()), re.IGNORECASE):
+        #         # writer.writeheader()
+        #         writer.writerow(rec)
+        #         seqs_wr += 1
+        #         if re.search(col, val_col, re.IGNORECASE):
+        #         # writer.writeheader
+        #             writer.writerow(rec)
+        #             seqs_wr += 1
             # else:
             #     sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
-        else:
-            if  val:
-                if re.search(val, str(rec.values()), re.IGNORECASE):
-                    # writer.writeheader()
-                    writer.writerow(rec)
-                    seqs_wr += 1
+        # else:
+        #     if val:
+        #         if re.search(val, str(rec.values()), re.IGNORECASE):
+        #             # writer.writeheader()
+        #             writer.writerow(rec)
+        #             seqs_wr += 1
 
-    print(f'Done, wrote {seqs_wr} to \"{args.outfile.name}\".')
+
     # if col not in reader.fieldnames:
     #     sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
 
