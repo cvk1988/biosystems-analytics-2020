@@ -74,19 +74,35 @@ def main():
     reader = csv.DictReader(args.file, delimiter=args.delimiter)
     val_col = ",".join(reader.fieldnames)
     seqs_wr = 0
+    fields = csv.DictWriter(args.outfile, reader.fieldnames)
+    fields.writeheader()
     for rec in reader:
         writer = csv.DictWriter(args.outfile, rec)
-        if re.search(val, str(rec.values()), re.IGNORECASE):
-            writer.writeheader()
-            writer.writerow(rec)
-            seqs_wr += 1
-        if col:
+        # writer.writeheader()
+        # if re.search(val, str(rec.values()), re.IGNORECASE):
+        #     # writer.writeheader()
+        #     writer.writerow(rec)
+        #     seqs_wr += 1
+        if col and val:
             if re.search(col, val_col, re.IGNORECASE):
-                writer.writeheader
+                # writer.writeheader
                 writer.writerow(rec)
-                seqs_wr += 1
+                # seqs_wr += 1
             else:
                 sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+            if re.search(val, str(rec.values()), re.IGNORECASE):
+                # writer.writeheader()
+                writer.writerow(rec)
+                seqs_wr += 1
+
+            # else:
+            #     sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+        else:
+            if  val:
+                if re.search(val, str(rec.values()), re.IGNORECASE):
+                    # writer.writeheader()
+                    writer.writerow(rec)
+                    seqs_wr += 1
 
     print(f'Done, wrote {seqs_wr} to \"{args.outfile.name}\".')
     # if col not in reader.fieldnames:
