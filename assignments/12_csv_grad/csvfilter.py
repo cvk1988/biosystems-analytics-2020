@@ -72,12 +72,26 @@ def main():
 
 
     reader = csv.DictReader(args.file, delimiter=args.delimiter)
+    val_col = str(reader.fieldnames)
+    seqs_wr = 0
+    for rec in reader:
+        writer = csv.DictWriter(args.outfile, rec)
+        if re.search(val, str(rec.values()), re.IGNORECASE):
+            # writer.writeheader()
+            writer.writerow(str(rec.values()))
+            seqs_wr += 1
+        if re.search(col, val_col, re.IGNORECASE):
+            # writer.writeheader
+            writer.writerow(str(rec.values()))
+            seqs_wr += 1
+        else:
+            sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
 
     # if col not in reader.fieldnames:
     #     sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
 
     #val_str = str(reader.restval)
-    val_col = str(reader.fieldnames)
+    # val_col = str(reader.fieldnames)
 
     # if col in reader.fieldnames:
     #     for rec in reader:
@@ -88,16 +102,17 @@ def main():
     #     else:
     #         sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
 
-    seqs_wr = 0
-    for rec in reader:
-        if re.search(val, str(rec.values), re.IGNORECASE):
-            csv.DictWriter(args.outfile, rec)
-            seqs_wr += 1
-        if re.search(col, val_col, re.IGNORECASE):
-            csv.DictWriter(args.outfile, rec)
-            seqs_wr += 1
-        else:
-            sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
+    # val_col = str(reader.fieldnames)
+    # seqs_wr = 0
+    # for rec in reader:
+    #     if re.search(val, str(rec.values()), re.IGNORECASE):
+    #         writer = csv.DictWriter(args.outfile, rec)
+    #         seqs_wr += 1
+    #     if re.search(col, val_col, re.IGNORECASE):
+    #         csv.DictWriter(args.outfile, rec)
+    #         seqs_wr += 1
+    #     else:
+    #         sys.exit(f'--col \"{col}\" not a valid column! \n Choose from {",".join(reader.fieldnames)}')
 
     print(f'Done, wrote {seqs_wr} to \"{args.outfile.name}\"')
 
